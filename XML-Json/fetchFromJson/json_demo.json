@@ -1,7 +1,7 @@
 {
   "name": "John",
   "birth": "1986-09-11",
-  "age": " 34",
+  "age": "34",
   "pets": [
     {
       "animal": "dog",

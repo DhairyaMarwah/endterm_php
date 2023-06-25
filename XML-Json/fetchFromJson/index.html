@@ -9,13 +9,14 @@
     <div>Birth: <span id="birth"></span></div>
     <div>Age: <span id="age"></span></div>
     <h2>Pets:</h2>
-    <ul id="pets"></ul>
+    <ul id="pets"> 
+    </ul>
+
     <script>
       var request = new XMLHttpRequest();
       request.open("GET", "json_demo.json", true);
       request.onreadystatechange = function () {
         if (request.readyState === 4 && request.status === 200) {
-          console.log(JSON.parse(request.responseText));
           var data = JSON.parse(request.responseText);
           renderData(data);
         }
@@ -25,13 +26,22 @@
       function renderData(data) {
         document.getElementById("name").textContent = data.name;
         document.getElementById("birth").textContent = data.birth;
-        document.getElementById("age").textContent = eval(data.age);
+        document.getElementById("age").textContent = data.age;
 
         var pets = data.pets;
-        const html = pets
-          .map((pet) => `<li>${pet.name} - ${pet.animal}</li>`)
-          .join("");
-        document.getElementById("pets").innerHTML = html;
+        var petsList = document.getElementById("pets");
+        for (var i = 0; i < pets.length; i++) {
+          var pet = pets[i];
+          var petItem = document.createElement("li");
+          petItem.textContent = pet.name + " - " + pet.animal;
+          petsList.appendChild(petItem);
+        }
+
+        // var pets = data.pets;
+        // const html = pets
+        //   .map((pet) => `<li>${pet.name} - ${pet.animal}</li>`)
+        //   .join("");
+        // document.getElementById("pets").innerHTML = html;
       }
     </script>
   </body>
