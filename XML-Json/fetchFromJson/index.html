@@ -11,15 +11,16 @@
     <h2>Pets:</h2>
     <ul id="pets"></ul>
     <script>
-      var xhr = new XMLHttpRequest();
-      xhr.open("GET", "json_demo.json", true);
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-          var data = JSON.parse(xhr.responseText);
+      var request = new XMLHttpRequest();
+      request.open("GET", "json_demo.json", true);
+      request.onreadystatechange = function () {
+        if (request.readyState === 4 && request.status === 200) {
+          console.log(JSON.parse(request.responseText));
+          var data = JSON.parse(request.responseText);
           renderData(data);
         }
       };
-      xhr.send();
+      request.send();
 
       function renderData(data) {
         document.getElementById("name").textContent = data.name;
@@ -27,13 +28,10 @@
         document.getElementById("age").textContent = eval(data.age);
 
         var pets = data.pets;
-        var petsList = document.getElementById("pets");
-        for (var i = 0; i < pets.length; i++) {
-          var pet = pets[i];
-          var petItem = document.createElement("li");
-          petItem.textContent = pet.name + " - " + pet.animal;
-          petsList.appendChild(petItem);
-        }
+        const html = pets
+          .map((pet) => `<li>${pet.name} - ${pet.animal}</li>`)
+          .join("");
+        document.getElementById("pets").innerHTML = html;
       }
     </script>
   </body>
