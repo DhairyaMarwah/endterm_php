@@ -12,18 +12,30 @@ $sql = "SELECT * FROM users";
 
 // Execute the SQL statement
 $result = $conn->query($sql);
-
-// Check if records were found
 if ($result->num_rows > 0) {
+    echo "<table>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+            </tr>";
+
     // Output data of each row
     while ($row = $result->fetch_assoc()) {
-        echo "ID: " . $row["id"] . "<br>";
-        echo " Name: " . $row["name"] . "<br>"; 
-        echo "Email: " . $row["email"] . "<br><br>";
+        echo "<tr>
+                <td>" . $row["id"] . "</td>
+                <td>" . $row["firstname"] . "</td>
+                <td>" . $row["lastname"] . "</td>
+                <td>" . $row["email"] . "</td>
+            </tr>";
     }
+
+    echo "</table>";
 } else {
     echo "No records found";
 }
+
 
 
 // Close the connection
