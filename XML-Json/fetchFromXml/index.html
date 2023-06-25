@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Load XML in HTML</title>
+    <script>
+      function loadXML() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            var xmlDoc = this.responseXML;
+            // Process the XML data here
+            renderXML(xmlDoc);
+            console.log(xmlDoc);
+          }
+        };
+        xhttp.open("GET", "example.xml", true);
+        xhttp.send();
+      }
+      function renderXML(xmlDoc) {
+        var books = xmlDoc.getElementsByTagName("book");
+        var output = document.getElementById("output");
+        output.innerHTML = "";
+
+        for (var i = 0; i < books.length; i++) {
+          var title = books[i].getElementsByTagName("title")[0].textContent;
+          var author = books[i].getElementsByTagName("author")[0].textContent;
+
+          var bookElement = document.createElement("div");
+          bookElement.innerHTML =
+            "<strong>Title:</strong> " +
+            title +
+            "<br>" +
+            "<strong>Author:</strong> " +
+            author;
+          output.appendChild(bookElement);
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <button onclick="loadXML()">Load XML</button>
+    <div id="output"></div> 
+  </body>
+</html>

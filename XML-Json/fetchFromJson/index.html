@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AJAX JSON Demo</title>
+  </head>
+  <body>
+    <h1>AJAX JSON Demo</h1>
+    <div>Name: <span id="name"></span></div>
+    <div>Birth: <span id="birth"></span></div>
+    <div>Age: <span id="age"></span></div>
+    <h2>Pets:</h2>
+    <ul id="pets"></ul>
+    <script>
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "json_demo.json", true);
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          var data = JSON.parse(xhr.responseText);
+          renderData(data);
+        }
+      };
+      xhr.send();
+
+      function renderData(data) {
+        document.getElementById("name").textContent = data.name;
+        document.getElementById("birth").textContent = data.birth;
+        document.getElementById("age").textContent = eval(data.age);
+
+        var pets = data.pets;
+        var petsList = document.getElementById("pets");
+        for (var i = 0; i < pets.length; i++) {
+          var pet = pets[i];
+          var petItem = document.createElement("li");
+          petItem.textContent = pet.name + " - " + pet.animal;
+          petsList.appendChild(petItem);
+        }
+      }
+    </script>
+  </body>
+</html>
