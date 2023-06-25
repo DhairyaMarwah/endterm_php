@@ -16,17 +16,14 @@ if ($result->num_rows > 0) {
     echo "<table>
             <tr>
                 <th>ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
+                <th> Name</th>
                 <th>Email</th>
             </tr>";
-
     // Output data of each row
     while ($row = $result->fetch_assoc()) {
         echo "<tr>
                 <td>" . $row["id"] . "</td>
-                <td>" . $row["firstname"] . "</td>
-                <td>" . $row["lastname"] . "</td>
+                <td>" . $row["name"] . "</td> 
                 <td>" . $row["email"] . "</td>
             </tr>";
     }
