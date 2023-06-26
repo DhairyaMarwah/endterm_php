@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Timer Clock</title>
+</head>
+<body>
+  <h1 id="timer"></h1>
+
+  <script>
+    function updateTimer() {
+      var timerElement = document.getElementById("timer");
+
+      var currentTime = new Date();
+      var hours = currentTime.getHours();
+      var minutes = currentTime.getMinutes();
+      var seconds = currentTime.getSeconds();
+
+      // Add leading zeros if necessary
+      hours = (hours < 10 ? "0" : "") + hours;
+      minutes = (minutes < 10 ? "0" : "") + minutes;
+      seconds = (seconds < 10 ? "0" : "") + seconds;
+
+      var formattedTime = hours + ":" + minutes + ":" + seconds;
+      timerElement.textContent = formattedTime;
+    }
+
+    // Update the timer every second using setInterval()
+    setInterval(updateTimer, 1000);
+
+    // Stop updating the timer after 10 seconds using setTimeout()
+    setTimeout(function() {
+      clearInterval(updateTimer);
+    }, 10000);
+  </script>
+</body>
+</html>
